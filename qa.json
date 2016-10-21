@@ -18,7 +18,7 @@
 },
   {
       "ParameterKey" : "InstanceSecuriyGroup",
-       "ParameterValue": "GitRules"
+       "ParameterValue": "sg-0a128073"
 }
 
 ]
