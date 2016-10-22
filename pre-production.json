@@ -1,0 +1,24 @@
+
+[
+  {
+      "ParameterKey" : "ImageID",
+       "ParameterValue": "ami-0053dd30"
+},
+  {
+      "ParameterKey" : "InstanceType",
+       "ParameterValue": "t2.micro"
+},
+  {
+      "ParameterKey" : "KeyName",
+       "ParameterValue": "aws"
+},
+  {
+      "ParameterKey" : "SubnetId",
+       "ParameterValue": "subnet-a7ccc8c3"
+},
+  {
+      "ParameterKey" : "InstanceSecurityGroup",
+       "ParameterValue": "sg-0a128073"
+}
+
+]
