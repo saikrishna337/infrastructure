@@ -32,31 +32,48 @@
 		"SubnetId": {
 			"Description": " The IP address range that can be used to SSH to the EC2 instances",
 			"Type": "AWS::EC2::Subnet::Id",
-			"Default": "subnet-0.0.0.0"
+			"Default": "subnet-12345"
 		}
 
 	},
-"Resources" : {
-	"testInstance": {
-		"Type": "AWS::EC2::Instance",
-		"Properties": {
-			"ImageId": {
-				"Ref": "ImageID"
-			},
-			"SecurityGroupIds": [{
-				"Ref": "InstanceSecurityGroup"
-			}],
-			"SubnetId": {
-				"Ref": "SubnetId"
-			},
-			"InstanceType": {
-				"Ref": "InstanceType"
-			},
-			"KeyName": {
-				"Ref": "KeyName"
+	"Resources": {
+		"testInstance": {
+			"Type": "AWS::EC2::Instance",
+			"Properties": {
+				"ImageId": {
+					"Ref": "ImageID"
+				},
+
+				"SecurityGroupIds": [{
+					"Ref": "InstanceSecurityGroup"
+				}],
+				"SubnetId": {
+					"Ref": "SubnetId"
+				},
+				"InstanceType": {
+					"Ref": "InstanceType"
+				},
+				"KeyName": {
+					"Ref": "KeyName"
+				},
+				"UserData": {
+					"Fn::Base64": {
+						"Fn::Join": ["", [
+							"#!/bin/bash -v\n",
+                                                        "curl -o /tmp/bootchef.sh http://54.164.43.124/bootchef.sh\n",
+                                                        "chmod +x /tmp/bootchef.sh\n",
+                                                        "/bin/bash /tmp/bootchef.sh\n",
+							"/opt/aws/bin/cfn-signal -e 0 -r \"ChefClient setup complete\" '", {
+							"Ref": "WaitHandle"
+							}, "'\n"
+
+						]]
+					}
+				}
 			}
+		},
+		"WaitHandle": {
+			"Type": "AWS::CloudFormation::WaitConditionHandle"
 		}
 	}
-}
-
 }
