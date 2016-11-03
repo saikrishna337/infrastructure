@@ -10,7 +10,7 @@
 },
   {
       "ParameterKey" : "KeyName",
-       "ParameterValue": "aws"
+       "ParameterValue": "chef"
 },
   {
       "ParameterKey" : "SubnetId",
